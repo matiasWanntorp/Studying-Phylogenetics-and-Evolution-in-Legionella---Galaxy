@@ -1,0 +1,300 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "In silico SBT and phylogeny",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Assemblies"
+                }
+            ],
+            "label": "Assemblies",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "4b29419e-61e5-4ca0-b734-147886c7191e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Legionella_pneumophila_schema"
+                }
+            ],
+            "label": "Legionella_pneumophila_schema",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 330
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ab5bd007-d67c-4e97-a686-4cce71b0b912",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/chewbbaca_allelecall/chewbbaca_allelecall/3.3.10+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "input_schema": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ChewBBACA AlleleCall",
+                    "name": "advanced"
+                },
+                {
+                    "description": "runtime parameter for tool ChewBBACA AlleleCall",
+                    "name": "advanced"
+                }
+            ],
+            "label": null,
+            "name": "ChewBBACA AlleleCall",
+            "outputs": [
+                {
+                    "name": "allelecall_results",
+                    "type": "input"
+                },
+                {
+                    "name": "allelcall_log",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 300,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/chewbbaca_allelecall/chewbbaca_allelecall/3.3.10+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c69c02c33322",
+                "name": "chewbbaca_allelecall",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"genes_list\": {\"__class__\": \"RuntimeValue\"}, \"training_file\": {\"__class__\": \"RuntimeValue\"}, \"cds_input\": false, \"blast_score_ratio\": null, \"minimum_length\": null, \"translation_table\": null, \"size_threshold\": null, \"no_inferred\": false, \"prodigal_mode\": \"single\", \"mode\": \"4\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"input_schema\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"output_selector\": [\"hash_profile\"]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.10+galaxy0",
+            "type": "tool",
+            "uuid": "caceedd0-bba6-4463-bbce-7dced326c99b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "allelcall_log",
+                    "output_name": "allelcall_log",
+                    "uuid": "e920d0a7-e38a-4da0-a3b8-015e1675e1ba"
+                },
+                {
+                    "label": "allelecall_results",
+                    "output_name": "allelecall_results",
+                    "uuid": "2783447d-d906-4454-af7e-6c104cbd4dbb"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/chewbbaca_allelecallevaluator/chewbbaca_allelecallevaluator/3.3.10+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "allelecall_results"
+                },
+                "input_schema": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool chewBBACA AlleleCallEvaluator",
+                    "name": "advanced"
+                }
+            ],
+            "label": null,
+            "name": "chewBBACA AlleleCallEvaluator",
+            "outputs": [
+                {
+                    "name": "html_file",
+                    "type": "html"
+                },
+                {
+                    "name": "cgMLST_MSA",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 600,
+                "top": 310
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/chewbbaca_allelecallevaluator/chewbbaca_allelecallevaluator/3.3.10+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a1420ba0b457",
+                "name": "chewbbaca_allelecallevaluator",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"annotations\": {\"__class__\": \"RuntimeValue\"}, \"computation\": null}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"input_schema\": {\"__class__\": \"ConnectedValue\"}, \"output\": {\"output_selector\": [\"cgMLST_MSA.fasta\"]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.3.10+galaxy1",
+            "type": "tool",
+            "uuid": "a587a3dd-d08d-4e16-8f90-8236ef9f0ee1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "cgMLST_MSA",
+                    "output_name": "cgMLST_MSA",
+                    "uuid": "244ffb55-cd9a-4832-8c05-8820fa6190db"
+                },
+                {
+                    "label": "html_file",
+                    "output_name": "html_file",
+                    "uuid": "31affda9-c16c-4a21-b8b2-3526c4809198"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.4.0+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "general_options|s": {
+                    "id": 3,
+                    "output_name": "cgMLST_MSA"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "general_options"
+                },
+                {
+                    "description": "runtime parameter for tool IQ-TREE",
+                    "name": "likelihood_mapping"
+                }
+            ],
+            "label": null,
+            "name": "IQ-TREE",
+            "outputs": [
+                {
+                    "name": "bionj",
+                    "type": "nhx"
+                },
+                {
+                    "name": "treefile",
+                    "type": "nhx"
+                },
+                {
+                    "name": "mldist",
+                    "type": "mldist"
+                },
+                {
+                    "name": "splits",
+                    "type": "nex"
+                },
+                {
+                    "name": "iqtree",
+                    "type": "iqtree"
+                }
+            ],
+            "position": {
+                "left": 900,
+                "top": 330
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.4.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "18a61a9c1601",
+                "name": "iqtree",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bootstrap_parameters\": {\"ultrafast_bootstrap\": {\"ufboot\": null, \"ufjack\": null, \"jack_prop\": null, \"boot_trees\": false, \"wbtl\": false, \"nmax\": \"1000\", \"bcor\": \"0.99\", \"nstep\": \"100\", \"beps\": \"0.5\", \"sampling\": null, \"bnni\": false}, \"nonparametric_bootstrap\": {\"boot\": null, \"jack\": null, \"jack_prop\": null, \"bcon\": null, \"bonly\": null, \"tbe\": false}}, \"general_options\": {\"s\": {\"__class__\": \"ConnectedValue\"}, \"o\": null, \"short_alignments\": false, \"seqtype\": \"DNA\", \"t\": {\"__class__\": \"RuntimeValue\"}, \"seed\": null, \"keep_ident\": false, \"epsilon\": null, \"safe\": false}, \"likelihood_mapping\": {\"lmap\": null, \"lmclust\": {\"__class__\": \"RuntimeValue\"}, \"quartetlh\": false}, \"miscellaneous_options\": {\"fconst\": null, \"blmin\": null, \"blmax\": null}, \"modelling_parameters\": {\"automatic_model\": {\"cond_model\": {\"opt_custommodel\": \"true\", \"__current_case__\": 0, \"m\": null}, \"merge_strategy\": {\"merge\": \"none\", \"__current_case__\": 0}, \"mset\": null, \"msub\": \"nuclear\", \"mfreq\": null, \"mrate\": null, \"cmin\": \"2\", \"cmax\": \"10\", \"merit\": \"AIC\", \"mtree\": false, \"madd\": null, \"mdef\": {\"__class__\": \"RuntimeValue\"}, \"modelomatic\": false}, \"specifying_substitution\": {\"mix_opt\": false}, \"rate_heterogeneity\": {\"alpha_min\": null, \"gamma_median\": false, \"i\": null, \"opt_gamma_inv\": false, \"rate\": false, \"mlrate\": false}, \"partition_model\": {\"model_selection\": {\"model\": \"none\", \"__current_case__\": 0}}, \"site_specific_frequency\": {\"tree_freq\": {\"__class__\": \"RuntimeValue\"}, \"site_freq\": null, \"freq_max\": false}}, \"time_tree\": {\"date_source\": {\"select_source\": \"none\", \"__current_case__\": 0}, \"date_tip\": null, \"date_root\": null, \"date_ci\": null, \"clock_sd\": null, \"date_no_outgroup\": false, \"date_outlier\": null, \"date_options\": null}, \"tree_parameters\": {\"tree_search\": {\"n\": null, \"ninit\": \"100\", \"ntop\": \"20\", \"nbest\": \"5\", \"nstop\": \"100\", \"radius\": \"6\", \"perturb\": \"0.5\", \"allnni\": false, \"tree_fix\": false, \"g\": {\"__class__\": \"RuntimeValue\"}, \"fast\": false, \"polytomy\": false, \"treels\": false, \"show_lh\": false, \"terrace\": false}, \"single_branch\": {\"alrt\": null, \"abayes\": false, \"lbp\": null}, \"tree_topology\": {\"trees\": {\"__class__\": \"RuntimeValue\"}, \"test\": null, \"test_weight\": false, \"test_au\": false}, \"constructing_consensus\": {\"contree\": false, \"connet\": false, \"sup_min\": \"0.0\", \"burnin\": null, \"support\": {\"__class__\": \"RuntimeValue\"}, \"suptag\": null}, \"computing_robinson_foulds\": {\"tree_dist_all\": false, \"tree_dist\": {\"__class__\": \"RuntimeValue\"}, \"tree_dist2\": {\"__class__\": \"RuntimeValue\"}}, \"generating_random\": {\"r\": null, \"rand\": null, \"branch_min\": null, \"branch_mean\": null, \"branch_max\": null}, \"ancestral_state\": {\"ancestral\": false, \"asr_min\": null}, \"symmetry_test\": {\"symtest\": false, \"symtest_remove_bad\": false, \"symtest_remove_good\": false, \"symtest_type\": null, \"symtest_pval\": null, \"symtest_keep_zero\": false}, \"concordance_factor\": {\"gcf\": {\"__class__\": \"RuntimeValue\"}, \"df_tree\": false, \"scf\": null, \"cf_verbose\": false, \"cf_quartet\": false}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.4.0+galaxy1",
+            "type": "tool",
+            "uuid": "cb7f4147-49e6-49e3-8e46-92e5f62e6243",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "splits",
+                    "output_name": "splits",
+                    "uuid": "5ccc9ce0-065b-4836-805c-01158dc47b29"
+                },
+                {
+                    "label": "mldist",
+                    "output_name": "mldist",
+                    "uuid": "75b40079-70fd-4d91-8a8d-b9bf5699f156"
+                },
+                {
+                    "label": "treefile",
+                    "output_name": "treefile",
+                    "uuid": "dbc26ac1-2718-4cf9-ab73-59aaeeade8c2"
+                },
+                {
+                    "label": "bionj",
+                    "output_name": "bionj",
+                    "uuid": "5192c153-4544-4ba9-b370-15faa77c056d"
+                },
+                {
+                    "label": "iqtree",
+                    "output_name": "iqtree",
+                    "uuid": "71a4fcc4-aeaf-48c2-8018-1ecbb36d4668"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "Legionella",
+        "phylogenetics",
+        "SBT"
+    ],
+    "uuid": "3a450f99-6bc9-4066-966e-1ff9e1da4e0d",
+    "version": 16
+}
